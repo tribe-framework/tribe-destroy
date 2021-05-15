@@ -42,7 +42,7 @@ if [[ ${REPLY,,} =~ ^(y|yes|Y|YES|Yes)$ ]]; then
 		echo "DROP USER $mysqlwuser@localhost" | mysql -u$mysqluser -p$mysqlpass -hlocalhost;
 		echo "DELETED: MySQL database $mysqlwuser";
 		echo -e "\r\n### -----------------\r\n";
-		echo "${green}DELETED successfully:${reset} Folder $installpath/$websitedomain, database $mysqluser and NginX config.";
+		echo "${green}DELETED successfully:${reset} Folder $installpath/$websitedomain, database $mysqlwuser and NginX config.";
 	else
 		echo "${red}Website Domain not defined.${reset}";
 	fi
