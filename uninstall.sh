@@ -5,7 +5,7 @@ installpath="/var/www/html";
 #user input for folder and database details
 read -p "Website Domain: " websitedomain;
 read -p "MySQL Root Username: " mysqluser;
-read -p "MySQL Root Password: " mysqlpass;
+read -s -p "MySQL Root Password: " mysqlpass;
 read -p "Website Database Name: " mysqlwuser;
 
 #ARE YOU SURE prompt
