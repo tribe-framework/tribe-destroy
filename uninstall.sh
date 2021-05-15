@@ -44,10 +44,10 @@ if [[ ${REPLY,,} =~ ^(y|yes|Y|YES|Yes)$ ]]; then
 		echo -e "\r\n### -----------------\r\n";
 		echo "${green}DELETED successfully:${reset} Folder $installpath/$websitedomain, database $mysqlwuser and NginX config.";
 	else
-		echo "${red}Website Domain not defined.${reset}";
+		echo "${red}ERROR:${reset} Website details not defined. All fields are compulsory. Please try again.";
 	fi
 
 #choosing no or invalid input in ARE YOU SURE prompt
 else
-	echo "${red}Website not deleted.${reset}";
+	echo "Website not deleted. Action cancelled.";
 fi
