@@ -15,7 +15,7 @@ read -s mysqlpass;
 read -p "Website Database Name: " mysqlwuser;
 
 #ARE YOU SURE prompt
-read -rp "ARE YOU SURE? Make sure you have a backup. This action will delete the website and all associated files. To proceed choose yes, no or cancel using [y/n/c].";
+read -rp "ARE YOU SURE? Make sure you have a backup. This action will delete the website $websitedomain and all associated files, database and config. To proceed choose yes, no or cancel using [y/n/c].";
 #yes, no or cancel
 [[ ${REPLY,,} =~ ^(c|cancel|C|CANCEL|Cancel)$ ]] && {
 	#choosing cancelled in ARE YOU SURE prompt
