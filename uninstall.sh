@@ -2,6 +2,11 @@
 cd /var/www/html;
 installpath="/var/www/html";
 
+#Initialising colours
+red=`tput setaf 1`;
+green=`tput setaf 2`;
+reset=`tput sgr0`;
+
 #user input for folder and database details
 read -p "Website Domain: " websitedomain;
 read -p "MySQL Root Username: " mysqluser;
@@ -33,9 +38,9 @@ if [[ ${REPLY,,} =~ ^(y|yes|Y|YES|Yes)$ ]]; then
 		sudo rm /etc/apache2/sites-available/$websitedomain.conf;
 		sudo rm /etc/apache2/sites-enabled/app.$websitedomain.conf;
 		sudo rm /etc/apache2/sites-available/app.$websitedomain.conf;
+		echo "${green}DELETED:${reset} Folder $installpath/$websitedomain";
 	else
-		echo "Website Domain not defined.";
-		echo "DELETED: Folder $installpath/$websitedomain";
+		echo "${red}Website Domain not defined.${reset}";
 	fi
 
 	#delete mysql user and database only if $mysqlwuser has been entered
@@ -45,10 +50,10 @@ if [[ ${REPLY,,} =~ ^(y|yes|Y|YES|Yes)$ ]]; then
 		echo "DROP USER $mysqlwuser@localhost" | mysql -u$mysqluser -p$mysqlpass -hlocalhost;
 		echo "DELETED: MySQL database $mysqlwuser";
 	else
-		echo "Website Database Name not defined.";
+		echo "${red}Website Database Name not defined.${reset}";
 	fi
 
 #choosing no or invalid input in ARE YOU SURE prompt
 else
-	echo "Website not deleted.";
+	echo "${red}Website not deleted.${reset}";
 fi
