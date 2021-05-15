@@ -27,7 +27,7 @@ read -rp "ARE YOU SURE? Make sure you have a backup. This action will delete the
 if [[ ${REPLY,,} =~ ^(y|yes|Y|YES|Yes)$ ]]; then
 
 	#delete directory only if $websitedomain has been entered, otherwise it could delete the entire /var/www/html directory
-	if [ -n "$websitedomain" ]
+	if [ -n "$websitedomain" ] && [ -n "$mysqluser" ] && [ -n "$mysqlpass" ] && [ -n "$mysqlwuser" ]
 	then
 		sudo rm $installpath/$websitedomain -R;
 		sudo rm /etc/nginx/sites-available/$websitedomain;
@@ -38,19 +38,13 @@ if [[ ${REPLY,,} =~ ^(y|yes|Y|YES|Yes)$ ]]; then
 		sudo rm /etc/apache2/sites-available/$websitedomain.conf;
 		sudo rm /etc/apache2/sites-enabled/app.$websitedomain.conf;
 		sudo rm /etc/apache2/sites-available/app.$websitedomain.conf;
-		echo "${green}DELETED:${reset} Folder $installpath/$websitedomain";
-	else
-		echo "${red}Website Domain not defined.${reset}";
-	fi
-
-	#delete mysql user and database only if $mysqlwuser has been entered
-	if [ -n "$mysqlwuser" ]
-	then
 		echo "DROP DATABASE $mysqlwuser" | mysql -u$mysqluser -p$mysqlpass -hlocalhost;
 		echo "DROP USER $mysqlwuser@localhost" | mysql -u$mysqluser -p$mysqlpass -hlocalhost;
 		echo "DELETED: MySQL database $mysqlwuser";
+		echo -e "\r\n### -----------------\r\n";
+		echo "${green}DELETED successfully:${reset} Folder $installpath/$websitedomain, database $mysqluser and NginX config.";
 	else
-		echo "${red}Website Database Name not defined.${reset}";
+		echo "${red}Website Domain not defined.${reset}";
 	fi
 
 #choosing no or invalid input in ARE YOU SURE prompt
